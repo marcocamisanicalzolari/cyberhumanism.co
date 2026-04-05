@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyberhumanism — A Manifesto by Marco Camisani Calzolari</title>
+<meta name="description" content="Cyberhumanism is a philosophy for the age of artificial intelligence. Technology must serve humanity, not replace it. Read and sign the manifesto.">
+<meta property="og:title" content="Cyberhumanism — A Manifesto">
+<meta property="og:description" content="A philosophy for the age of artificial intelligence. Technology must serve humanity, not replace it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cyberhumanism.co">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #0a0c10;
+    --paper: #f5f0e8;
+    --paper-light: #faf7f1;
+    --gold: #b8860b;
+    --gold-light: #d4a843;
+    --gold-dim: rgba(184, 134, 11, 0.15);
+    --gray: #6b6560;
+    --gray-light: #9a938d;
+    --rule: #d4cfc7;
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+    --sans: 'DM Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 18px;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--gold-dim);
+    color: var(--ink);
+  }
+
+  /* ── NAV ─────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(245, 240, 232, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.4s;
+  }
+
+  nav.scrolled {
+    border-bottom-color: var(--rule);
+  }
+
+  nav .logo {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  nav .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav .nav-links a {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  nav .nav-links a:hover {
+    color: var(--gold);
+  }
+
+  /* ── HERO ─────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(ellipse at 20% 50%, rgba(184, 134, 11, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(184, 134, 11, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-label {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.5s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-subtitle {
+    font-family: var(--serif);
+    font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--gray);
+    max-width: 38rem;
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.8s forwards;
+  }
+
+  .hero-scroll {
+    opacity: 0;
+    animation: fadeUp 1.2s ease 1.2s forwards;
+  }
+
+  .hero-scroll a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    transition: gap 0.3s;
+  }
+
+  .hero-scroll a:hover {
+    gap: 0.8rem;
+  }
+
+  .hero-scroll .arrow {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-right: 1.5px solid var(--gold);
+    border-bottom: 1.5px solid var(--gold);
+    transform: rotate(45deg);
+    animation: bounce 2s infinite;
+  }
+
+  /* ── MANIFESTO ────────────────────────────── */
+  .manifesto {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 6rem 2rem 8rem;
+  }
+
+  .manifesto-number {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .manifesto-section-title {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.25;
+    margin-bottom: 3rem;
+    color: var(--ink);
+  }
+
+  .manifesto p {
+    font-family: var(--sans);
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .manifesto p strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .manifesto-divider {
+    width: 3rem;
+    height: 1px;
+    background: var(--gold);
+    margin: 4rem auto;
+  }
+
+  .principle {
+    margin-bottom: 3rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--gold-dim);
+    transition: border-color 0.4s;
+  }
+
+  .principle:hover {
+    border-left-color: var(--gold);
+  }
+
+  .principle-num {
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .principle-title {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+
+  .principle p {
+    font-size: 0.98rem;
+    color: var(--gray);
+    margin-bottom: 0;
+  }
+
+  /* ── QUOTE BLOCK ──────────────────────────── */
+  .quote-block {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .quote-block blockquote {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    max-width: 40rem;
+    margin: 0 auto 2rem;
+  }
+
+  .quote-block cite {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    font-style: normal;
+  }
+
+  /* ── ABOUT ────────────────────────────────── */
+  .about {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 8rem 2rem;
+  }
+
+  .about-label {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .about h2 {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 2.5rem;
+    color: var(--ink);
+  }
+
+  .about p {
+    font-family: var(--sans);
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .about p a {
+    color: var(--gold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.3s;
+  }
+
+  .about p a:hover {
+    color: var(--gold-light);
+  }
+
+  .credentials {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .credential {
+    padding: 1rem 0;
+  }
+
+  .credential-label {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .credential-value {
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    color: var(--ink);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* ── SIGN ─────────────────────────────────── */
+  .sign-section {
+    background: var(--paper-light);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .sign-section h2 {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 1.2rem;
+    color: var(--ink);
+  }
+
+  .sign-section > p {
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--gray);
+    max-width: 32rem;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .sign-form {
+    max-width: 28rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .sign-form input {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid var(--rule);
+    background: white;
+    color: var(--ink);
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .sign-form input:focus {
+    border-color: var(--gold);
+  }
+
+  .sign-form input::placeholder {
+    color: var(--gray-light);
+  }
+
+  .sign-form button {
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .sign-form button:hover {
+    background: var(--gold);
+    transform: translateY(-1px);
+  }
+
+  .sign-note {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    color: var(--gray-light);
+    margin-top: 1rem;
+  }
+
+  /* ── BOOK ──────────────────────────────────── */
+  .book-section {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .book-section h2 {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+
+  .book-section p {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .book-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .book-links a {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.8rem 1.8rem;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s;
+  }
+
+  .book-links a:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* ── FOOTER ───────────────────────────────── */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  footer .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: var(--paper);
+  }
+
+  footer p {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--gray-light);
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+  }
+
+  footer a {
+    color: var(--gold-light);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  footer a:hover {
+    color: var(--paper);
+  }
+
+  footer .footer-divider {
+    width: 2rem;
+    height: 1px;
+    background: var(--gray);
+    margin: 2rem auto;
+  }
+
+  /* ── ANIMATIONS ───────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: rotate(45deg) translateY(0); }
+    40% { transform: rotate(45deg) translateY(6px); }
+    60% { transform: rotate(45deg) translateY(3px); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ───────────────────────────── */
+  @media (max-width: 768px) {
+    html { font-size: 16px; }
+    nav { padding: 1rem 1.2rem; }
+    nav .nav-links { gap: 1.2rem; }
+    nav .nav-links a { font-size: 0.7rem; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .manifesto, .about, .book-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .credentials { grid-template-columns: 1fr; }
+    .quote-block { padding: 4rem 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    nav .nav-links { gap: 0.8rem; }
+    .principle { padding-left: 1rem; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ── NAV ──────────────────────────────────── -->
+<nav id="nav">
+  <a href="#" class="logo">Cyberhumanism</a>
+  <ul class="nav-links">
+    <li><a href="#manifesto">Manifesto</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#sign">Sign</a></li>
+    <li><a href="#book">Book</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-label">A Philosophy for the Age of Artificial Intelligence</div>
+  <h1><em>Cyber</em>humanism</h1>
+  <p class="hero-subtitle">
+    Technology must serve humanity, not replace it.<br>
+    We need a new framework to guide our choices in the age of intelligent machines.
+  </p>
+  <div class="hero-scroll">
+    <a href="#manifesto">Read the manifesto <span class="arrow"></span></a>
+  </div>
+</section>
+
+<!-- ── MANIFESTO ────────────────────────────── -->
+<section class="manifesto" id="manifesto">
+
+  <div class="fade-in">
+    <div class="manifesto-number">The Manifesto</div>
+    <h2 class="manifesto-section-title">Why Cyberhumanism</h2>
+
+    <p>We live in a time of radical transformation. Artificial intelligence is reshaping how we work, decide, communicate, govern, and relate to each other. The speed of change has outpaced our capacity to understand its consequences.</p>
+
+    <p>We are not facing a simple technological upgrade. We are facing a redefinition of what it means to be human in a world where machines learn, generate, persuade, and make decisions that were once ours alone.</p>
+
+    <p>Previous philosophical frameworks addressed the digital revolution in broad terms. Digital Humanism, born in Vienna in 2019, called for technology aligned with human values. That call was necessary. But it was not enough.</p>
+
+    <p>The word "digital" describes a format. The word "cyber" describes a relationship: between humans, machines, networks, and the intelligence that connects them. The challenge we face today is not about digital tools. It is about systems that think, act, and influence, often without our knowledge, sometimes without our consent.</p>
+
+    <p><strong>Cyberhumanism is a response to this specific moment.</strong> It is a philosophy born from direct experience inside the institutions that govern AI, from years of translating complex technology for millions of people, and from the conviction that humans must remain the authors of their own decisions.</p>
+  </div>
+
+  <div class="manifesto-divider"></div>
+
+  <div class="fade-in">
+    <div class="manifesto-number">The Principles</div>
+    <h2 class="manifesto-section-title">What We Believe</h2>
+  </div>
+
+  <div class="principle fade-in">
+    <span class="principle-num">I</span>
+    <div class="principle-title">Humans decide. Machines assist.</div>
+    <p>No algorithm should make a consequential decision about a human life without meaningful human oversight. The augmented human, empowered by intelligent tools, is the future. The replaced human is not.</p>
+  </div>
+
+  <div class="principle fade-in">
+    <span class="principle-num">II</span>
+    <div class="principle-title">Ethics begins at design, not after deployment.</div>
+    <p>Embedding ethical considerations into AI systems from the first line of code is not an obstacle to innovation. It is a condition for trustworthy innovation. Responsible design is not a constraint. It is a competitive advantage.</p>
+  </div>
+
+  <div class="principle fade-in">
+    <span class="principle-num">III</span>
+    <div class="principle-title">Transparency is non-negotiable.</div>
+    <p>Citizens have the right to know when they are interacting with AI, how their data is being used, and why a system made a specific decision. Opacity in AI systems is a threat to democracy.</p>
+  </div>
+
+  <div class="principle fade-in">
+    <span class="principle-num">IV</span>
+    <div class="principle-title">AI governance requires insiders, not only observers.</div>
+    <p>Philosophy and policy must be informed by people who have worked inside the systems they seek to govern. Theory without institutional practice produces rules that no one can implement and no one will follow.</p>
+  </div>
+
+  <div class="principle fade-in">
+    <span class="principle-num">V</span>
+    <div class="principle-title">Digital literacy is a fundamental right.</div>
+    <p>Every citizen must have the knowledge to understand, question, and navigate AI-mediated environments. Digital illiteracy in the age of artificial intelligence is a form of disenfranchisement.</p>
+  </div>
+
+  <div class="principle fade-in">
+    <span class="principle-num">VI</span>
+    <div class="principle-title">Democracy cannot be delegated to algorithms.</div>
+    <p>Electoral processes, public discourse, and institutional decision-making must remain under human control. When AI shapes political opinion at scale, it is not serving democracy. It is undermining it.</p>
+  </div>
+
+  <div class="principle fade-in">
+    <span class="principle-num">VII</span>
+    <div class="principle-title">The vulnerable must be protected first.</div>
+    <p>Children, minorities, elderly populations, and communities with limited digital access bear the highest risk from unregulated AI. Protection of the most vulnerable is not an afterthought. It is the first test of any AI system.</p>
+  </div>
+
+  <div class="principle fade-in">
+    <span class="principle-num">VIII</span>
+    <div class="principle-title">AI is global. Governance must be too.</div>
+    <p>No single nation or bloc can regulate AI alone. Europe, the United States, and the rest of the world must find common ground on AI governance. Competition between regulatory models should produce better standards, not regulatory vacuums.</p>
+  </div>
+
+  <div class="principle fade-in">
+    <span class="principle-num">IX</span>
+    <div class="principle-title">Communication is a human act.</div>
+    <p>When AI generates content that influences, persuades, or informs, the responsibility remains with humans. Strategic communication in the age of AI requires understanding algorithms not as tools but as actors with their own logic and biases.</p>
+  </div>
+
+  <div class="principle fade-in">
+    <span class="principle-num">X</span>
+    <div class="principle-title">The future is not inevitable. It is a choice.</div>
+    <p>Transhumanism promises a future where machines transcend human limitations. Cyberhumanism proposes a future where humans use machines to amplify their own capabilities, judgment, and creativity. The plumber of the future is not a robot. It is a human with superpowers granted by technology.</p>
+  </div>
+
+</section>
+
+<!-- ── QUOTE ────────────────────────────────── -->
+<section class="quote-block">
+  <blockquote class="fade-in">
+    "We must dominate artificial intelligence, not be dominated by it. The augmented human is the path forward: intelligent technology as an instrument that amplifies human capabilities."
+  </blockquote>
+  <cite class="fade-in">Marco Camisani Calzolari</cite>
+</section>
+
+<!-- ── ABOUT ────────────────────────────────── -->
+<section class="about" id="about">
+  <div class="fade-in">
+    <div class="about-label">The Author</div>
+    <h2>Marco Camisani Calzolari</h2>
+
+    <p>Marco Camisani Calzolari coined the concept of Cyberhumanism and published the foundational book <em>Cyberumanesimo</em> (Il Sole 24 Ore, 2024). He is not a philosopher writing from outside the systems he critiques. He is a practitioner who has worked inside the institutions that govern artificial intelligence.</p>
+
+    <p>He was a member of the European Commission's General Purpose AI Code of Practice Working Group, shaping the rules that govern AI systems across Europe. He serves on Italy's National AI Strategy Committee at the Presidency of the Council of Ministers and is an expert by decree at Italy's National Cybersecurity Agency.</p>
+
+    <p>He has addressed the United Nations in New York on AI risks for minorities, the UK Parliament's House of Lords on AI and democracy, and the Italian Chamber of Deputies with a Lectio Magistralis on the future of intelligent systems.</p>
+
+    <p>An Adjunct Professor of Cyber-Humanities at Università Vita-Salute San Raffaele in Milan, he is also a science communicator whose work reaches approximately 25 million monthly video views across digital platforms. He is a Knight of the Order of the Star of Italy and a Freeman of the City of London.</p>
+
+    <p>He lives in New York City. <a href="https://camisanicalzolari.com" target="_blank" rel="noopener">camisanicalzolari.com</a></p>
+  </div>
+
+  <div class="credentials fade-in">
+    <div class="credential">
+      <div class="credential-label">European Commission</div>
+      <div class="credential-value">Member, General Purpose AI Code of Practice Working Group</div>
+    </div>
+    <div class="credential">
+      <div class="credential-label">Italian Government</div>
+      <div class="credential-value">Member, National AI Strategy Committee 2024-2026</div>
+    </div>
+    <div class="credential">
+      <div class="credential-label">Cybersecurity</div>
+      <div class="credential-value">Expert by decree, National Cybersecurity Agency (ACN)</div>
+    </div>
+    <div class="credential">
+      <div class="credential-label">Academia</div>
+      <div class="credential-value">Adjunct Professor, Cyber-Humanities, UniSR Milan</div>
+    </div>
+    <div class="credential">
+      <div class="credential-label">Public Speaking</div>
+      <div class="credential-value">500+ keynotes. UN, House of Lords, Chamber of Deputies</div>
+    </div>
+    <div class="credential">
+      <div class="credential-label">Books</div>
+      <div class="credential-value">7 published, including <em>Cyberumanesimo</em> and <em>Artificial Decisions</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SIGN ─────────────────────────────────── -->
+<section class="sign-section" id="sign">
+  <h2 class="fade-in">Sign the Manifesto</h2>
+  <p class="fade-in">Add your name to a growing community of people who believe that artificial intelligence must serve humanity, not replace it.</p>
+  
+  <div class="sign-form fade-in">
+    <input type="text" name="name" placeholder="Your full name" required>
+    <input type="email" name="email" placeholder="Your email address" required>
+    <input type="text" name="title" placeholder="Title / affiliation (optional)">
+    <button type="button" onclick="handleSign()">Sign the Manifesto</button>
+  </div>
+  <p class="sign-note fade-in">Your email will not be published. Your name and affiliation will appear in the list of signatories.</p>
+</section>
+
+<!-- ── BOOK ─────────────────────────────────── -->
+<section class="book-section" id="book">
+  <div class="fade-in">
+    <div class="about-label">The Book</div>
+    <h2>Cyberumanesimo</h2>
+    <p>Published by Il Sole 24 Ore in 2024, <em>Cyberumanesimo</em> is the foundational text of the Cyberhumanism philosophy. It examines AI, democracy, ethics, and the future of work through the lens of a practitioner who has helped write the rules of AI governance from the inside.</p>
+    <p>The English edition, <em>Artificial Decisions</em>, expands on this framework and explores how AI is reshaping the decisions that individuals, organizations, and institutions make.</p>
+    <div class="book-links">
+      <a href="https://www.amazon.it/Cyberumanesimo-Intelligenza-artificiale-democrazie-rischio/dp/B0CPH8DQM1" target="_blank" rel="noopener">Italian Edition</a>
+      <a href="https://camisanicalzolari.com" target="_blank" rel="noopener">English Edition — Coming Soon</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ───────────────────────────────── -->
+<footer>
+  <div class="footer-logo">Cyberhumanism</div>
+  <p>A philosophy by <a href="https://camisanicalzolari.com" target="_blank" rel="noopener">Marco Camisani Calzolari</a></p>
+  <p><a href="mailto:manifesto@cyberhumanism.co">manifesto@cyberhumanism.co</a></p>
+  <div class="footer-divider"></div>
+  <p>&copy; 2026 Marco Camisani Calzolari. All rights reserved.</p>
+</footer>
+
+<!-- ── SCRIPTS ──────────────────────────────── -->
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Sign form handler (placeholder)
+  function handleSign() {
+    const name = document.querySelector('input[name="name"]').value.trim();
+    const email = document.querySelector('input[name="email"]').value.trim();
+    
+    if (!name || !email) {
+      alert('Please enter your name and email address.');
+      return;
+    }
+    
+    // In production, this would POST to a backend or service like Formspree, Airtable, etc.
+    alert('Thank you, ' + name + '. Your signature has been recorded.\n\nWe will confirm your addition to the signatories list via email.');
+    
+    document.querySelector('input[name="name"]').value = '';
+    document.querySelector('input[name="email"]').value = '';
+    document.querySelector('input[name="title"]').value = '';
+  }
+</script>
+
+</body>
+</html>
